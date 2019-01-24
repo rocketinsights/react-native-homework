@@ -1,22 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { ScreenOrientation } from 'expo';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import fetch from 'cross-fetch';
+import List from './components/list';
+import Detail from './components/detail';
 
+const { LANDSCAPE } = ScreenOrientation.Orientation;
+const appState = observable({
+  launches: []
+});
+
+@observer
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { excitement: '' };
+    ScreenOrientation.allowAsync(LANDSCAPE);
   }
 
-  getExcited() {
-    this.setState({ excitement: this.state.excitement + '!' });
+  componentWillMount() {
+    fetch('https://api.spacexdata.com/v3/launches?start=2019-01-01&end=2019-04-30')
+      .then(r => r.json())
+      .then(ls => appState.launches.push(...ls))
+      .then(() => console.log(appState.launches.length));
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello, world{this.state.excitement}</Text>
-        <Button title='Get Excited' onPress={() => this.getExcited()} />
+        <List launches={appState.launches}/>
+        <Detail />
       </View>
     );
   }
@@ -25,8 +40,9 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
