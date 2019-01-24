@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, Image, View } from 'react-native';
+import { AppRegistry, StyleSheet, Text, Image, View, TouchableHighlight } from 'react-native';
 
 export default class ListItem extends Component {
     render() {
@@ -16,18 +16,20 @@ export default class ListItem extends Component {
         // const [ thumbnail ] = flickr_images;
 
         return (
-            <View style={styles.container}>
-                <Image style={styles.thumbnail} source={require('../../assets/rocketinsights_logo_mark.png')} />
-                <View style={styles.launchInfo}>
-                    <Text style={styles.title}>
-                        {mission_name}
-                        <Text style={styles.flightNumber}> (#{flight_number})</Text>
-                    </Text>
-                    <Text>
-                        {site_name_long}
-                    </Text>
+            <TouchableHighlight underlayColor="grey" onPress={this.props.onPress}>
+                <View style={styles.container}>
+                    <Image style={styles.thumbnail} source={require('../../assets/rocketinsights_logo_mark.png')} />
+                    <View style={styles.launchInfo}>
+                        <Text style={styles.title}>
+                            {mission_name}
+                            <Text style={styles.flightNumber}> (#{flight_number})</Text>
+                        </Text>
+                        <Text>
+                            {site_name_long}
+                        </Text>
+                    </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         );
     }
 }
