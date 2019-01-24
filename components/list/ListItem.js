@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, Image, View, TouchableHighlight } from 'react-native';
 
-function getThumbnail(launch) {
-    const {
-        links: {
-            flickr_images
-        }
-    } = launch;
-
-    if (flickr_images.length === 0) {
-        return require('../../assets/rocketinsights_logo_mark.png');
-    } else {
-        return { uri: flickr_images[0] };
-    }    
-}
-
 export default class ListItem extends Component {
+
     render() {
         const launch = this.props.launch;
         const { 
@@ -29,7 +16,7 @@ export default class ListItem extends Component {
         return (
             <TouchableHighlight underlayColor="grey" onPress={this.props.onPress}>
                 <View style={styles.container}>
-                    <Image style={styles.thumbnail} source={getThumbnail(launch)} />
+                    <Image style={styles.thumbnail} source={this.props.thumbnail} />
                     <View style={styles.launchInfo}>
                         <Text style={styles.title}>
                             {mission_name}
