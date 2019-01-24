@@ -12,10 +12,15 @@ export default class ListItem extends Component {
                 site_name_long
             }
         } = launch;
+        let style = styles.container;
+
+        if (this.props.selected) {
+            style = { ...style, ...styles.selected };
+        }
 
         return (
             <TouchableHighlight underlayColor="grey" onPress={this.props.onPress}>
-                <View style={styles.container}>
+                <View style={style}>
                     <Image style={styles.thumbnail} source={this.props.thumbnail} />
                     <View style={styles.launchInfo}>
                         <Text style={styles.title}>
@@ -36,7 +41,15 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'flex-start',
         paddingVertical: 20,
+        paddingHorizontal: 8,
         flexDirection: 'row'
+    },
+    selected: {
+        borderLeftWidth: 4,
+        borderLeftColor: '#005288',
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 4,
+        paddingLeft: 4
     },
     launchInfo: {
         paddingLeft: 16,
