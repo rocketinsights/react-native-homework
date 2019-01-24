@@ -22,7 +22,7 @@ export default class List extends Component {
   }
 
   render() {
-    const { launches } = this.props;
+    const { launches, selectedLaunch } = this.props;
 
     if (launches.length === 0) {
       return <View style={styles.loading}><Text>Loading...</Text></View>;
@@ -35,6 +35,7 @@ export default class List extends Component {
             onPress={() => this.props.onLaunchPress(l)}
             key={l.flight_number}
             launch={l}
+            selected={selectedLaunch && selectedLaunch.flight_number === l.flight_number}
             thumbnail={this._getThumbnail(l.rocket.rocket_name)} />))}
       </ScrollView>
     );
