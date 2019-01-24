@@ -13,6 +13,13 @@ const appState = observable({
   launchDetail: null
 });
 
+async function getLaunchDetail(launch) {
+  const { launch_site: { site_id: launchpadId } } = launch;
+  const launchpad = await fetch(`https://api.spacexdata.com/v3/launchpads/${launchpadId}`).then(r => r.json());
+
+  return { ...launch, ...{ launch_site: launchpad } };
+}
+
 @observer
 export default class App extends React.Component {
   constructor(props) {
@@ -32,7 +39,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.list}>
-          <List launches={appState.launches} onLaunchPress={l => appState.launchDetail = l} />
+          <List launches={appState.launches} onLaunchPress={async l => appState.launchDetail = await getLaunchDetail(l)} />
         </View>
         <View style={styles.detail}>
           <Detail launch={appState.launchDetail} />
