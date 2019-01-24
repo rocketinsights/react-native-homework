@@ -30,7 +30,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <List launches={appState.launches}/>
+        <List style={styles.list} launches={appState.launches}/>
         <Detail style={styles.detail} />
       </View>
     );
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     padding: 16
   },
   list: {
-    flex: 2
+    flex: 3
   },
   detail: {
-    flex: 1
+    flex: 2
   }
 });
