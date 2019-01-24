@@ -10,7 +10,7 @@ import Detail from './components/detail';
 const { LANDSCAPE } = ScreenOrientation.Orientation;
 const appState = observable({
   launches: [],
-  launchDetail: null,
+  selectedLaunch: null,
   rocketImages: {}
 });
 
@@ -45,10 +45,15 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.list}>
-          <List launches={appState.launches} images={appState.rocketImages} onLaunchPress={async l => appState.launchDetail = await getLaunchDetail(l)} />
+          <List
+            launches={appState.launches}
+            images={appState.rocketImages}
+            selectedLaunch={appState.selectedLaunch}
+            onLaunchPress={async l => appState.selectedLaunch = await getLaunchDetail(l)}
+          />
         </View>
         <View style={styles.detail}>
-          <Detail launch={appState.launchDetail} />
+          <Detail launch={appState.selectedLaunch} />
         </View>
       </View>
     );
