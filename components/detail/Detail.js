@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Text } from 'react-native';
 import { MapView } from 'expo';
 import { observer } from 'mobx-react';
+import DetailText from './DetailText';
 
 @observer
 export default class Detail extends Component {
@@ -47,7 +48,7 @@ export default class Detail extends Component {
                     </MapView>
                 </View>
                 <View style={styles.flightDetails}>
-                    <Text>{text}</Text>
+                    <DetailText launch={launch} />
                 </View>
             </View>
         );
