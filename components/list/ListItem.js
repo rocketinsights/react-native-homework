@@ -25,7 +25,6 @@ export default class ListItem extends Component {
                 site_name_long
             }
         } = launch;
-        // const [ thumbnail ] = flickr_images;
 
         return (
             <TouchableHighlight underlayColor="grey" onPress={this.props.onPress}>
