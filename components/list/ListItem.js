@@ -1,31 +1,59 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet } from 'react-native';
+import { AppRegistry, StyleSheet, Text, Image, View } from 'react-native';
 
 export default class ListItem extends Component {
-    constructor(props = {
-        launch: {
-            details,
+    render() {
+        const { 
+            mission_name,
             flight_number,
-            links: {
-                flikr_images
+            links: { 
+                flickr_images
             },
             launch_site: {
                 site_name_long
             }
-        }
-    }) {
-        super(props);
+        } = this.props.launch;
+        // const [ thumbnail ] = flickr_images;
 
-        consol;
-    }
-
-    render() {
-        const { site_name_long: siteName } = this.props.launch_site;
-        const { flight_number: flightNumber } = this.props;
         return (
-            <Text>{siteName} ({flightNumber})</Text>
+            <View style={styles.container}>
+                <Image style={styles.thumbnail} source={require('../../assets/rocketinsights_logo_mark.png')} />
+                <View style={styles.launchInfo}>
+                    <Text style={styles.title}>
+                        {mission_name}
+                        <Text style={styles.flightNumber}> (#{flight_number})</Text>
+                    </Text>
+                    <Text>
+                        {site_name_long}
+                    </Text>
+                </View>
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'flex-start',
+        paddingVertical: 20,
+        flexDirection: 'row'
+    },
+    launchInfo: {
+        paddingTop: 8,
+        paddingLeft: 16,
+        flexDirection: 'column'
+    },
+    title: {
+        fontWeight: 'bold',
+        marginBottom: 4
+    },
+    flightNumber: {
+        fontWeight: 'normal'
+    },
+    thumbnail: {
+        height: 64,
+        width: 64
+    }
+});
 
 AppRegistry.registerComponent('LaunchSchedule', () => ListItem);
