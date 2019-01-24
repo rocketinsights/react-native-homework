@@ -32,8 +32,7 @@ export default class Detail extends Component {
                 latitude,
                 longitude
             },
-            title: "Launch Site",
-            description: ""
+            title: 'Launch Site'
         };
 
         return (
