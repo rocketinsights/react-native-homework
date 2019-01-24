@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Text } from 'react-native';
+import { AppRegistry, StyleSheet, ScrollView, View, Text } from 'react-native';
 import ListItem from './ListItem';
 import { observer } from 'mobx-react';
 
@@ -12,9 +12,17 @@ export default class List extends Component {
   }
 
   render() {
+    const { launches } = this.props;
+    
+    if (launches.length === 0) {
+      return <View style={styles.loading}><Text>Loading...</Text></View>;
+    }
+
     return (
-      <View style={styles.container}>
-        {this.props.launches.map((l, i) => <Text key={i}>{i}</Text>)}
+      <View style={this.props.style}>
+        <ScrollView>
+          {launches.map(l => <ListItem key={l.flight_number} launch={l} />)}
+        </ScrollView>
       </View>
     );
   }
@@ -22,8 +30,10 @@ export default class List extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center'
+    flex: 1
+  },
+  loading: {
+    justifyContent: 'center'
   }
 });
 
