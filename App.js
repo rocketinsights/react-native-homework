@@ -31,8 +31,12 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <List style={styles.list} launches={appState.launches} onLaunchPress={l => appState.launchDetail = l} />
-        <Detail style={styles.detail} launch={appState.launchDetail} />
+        <View style={styles.list}>
+          <List launches={appState.launches} onLaunchPress={l => appState.launchDetail = l} />
+        </View>
+        <View style={styles.detail}>
+          <Detail launch={appState.launchDetail} />
+        </View>
       </View>
     );
   }

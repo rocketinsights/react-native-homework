@@ -19,11 +19,9 @@ export default class List extends Component {
     }
 
     return (
-      <View style={this.props.style}>
-        <ScrollView>
-          {launches.map(l => <ListItem onPress={() => this.props.onLaunchPress(l)} key={l.flight_number} launch={l} />)}
-        </ScrollView>
-      </View>
+      <ScrollView>
+        {launches.map(l => <ListItem onPress={() => this.props.onLaunchPress(l)} key={l.flight_number} launch={l} />)}
+      </ScrollView>
     );
   }
 }
