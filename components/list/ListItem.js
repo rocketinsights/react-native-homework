@@ -52,20 +52,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     launchInfo: {
-        paddingTop: 8,
         paddingLeft: 16,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        justifyContent: 'center'
     },
     title: {
         fontWeight: 'bold',
-        marginBottom: 4
+        marginBottom: 16
     },
     flightNumber: {
         fontWeight: 'normal'
     },
     thumbnail: {
-        height: 64,
-        width: 64
+        height: 96,
+        width: 96
     }
 });
 
