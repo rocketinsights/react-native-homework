@@ -31,7 +31,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <List launches={appState.launches}/>
-        <Detail />
+        <Detail style={styles.detail} />
       </View>
     );
   }
@@ -39,10 +39,14 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 16
+  },
+  list: {
+    flex: 2
+  },
+  detail: {
+    flex: 1
   }
 });
