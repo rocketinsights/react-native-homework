@@ -9,7 +9,8 @@ import Detail from './components/detail';
 
 const { LANDSCAPE } = ScreenOrientation.Orientation;
 const appState = observable({
-  launches: []
+  launches: [],
+  launchDetail: null
 });
 
 @observer
@@ -30,8 +31,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <List style={styles.list} launches={appState.launches}/>
-        <Detail style={styles.detail} />
+        <List style={styles.list} launches={appState.launches} onLaunchPress={l => appState.launchDetail = l} />
+        <Detail style={styles.detail} launch={appState.launchDetail} />
       </View>
     );
   }
