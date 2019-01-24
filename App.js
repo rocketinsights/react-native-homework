@@ -53,12 +53,12 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.list}>
-          <View>
+          <View style={styles.searchSortContainer}>
             <TextInput
               style={styles.search}
               placeholder="Filter..."
               onChangeText={t => appState.searchText = t} />
-            <Text onPress={this._flipSort}>Launch Date {(appState.sort === 'asc' ? '⬇' : '⬆')}</Text>
+            <Text style={styles.sort} onPress={this._flipSort}>Launch Date {(appState.sort === 'asc' ? '⬇' : '⬆')}</Text>
           </View>
           <List
             launches={appState.launches}
@@ -95,5 +95,12 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderRadius: 2,
     width: 256
+  },
+  searchSortContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  sort: {
+    paddingLeft: 16
   }
 });
