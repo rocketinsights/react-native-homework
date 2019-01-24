@@ -10,10 +10,9 @@ export default class Detail extends Component {
         const { launch } = this.props;
 
         if (!launch) {
-            return <Text>Select a Launch to view details</Text>;
+            return <View style={styles.noSelection}><Text>Select a Launch to view details</Text></View>;
         }
 
-        const text =  launch.details || "No details available yet... Check back later!";
         const {
             launch_site: {
                 location: {
@@ -74,6 +73,11 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingTop: 16
+    },
+    noSelection: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
     }
 });
 
