@@ -21,19 +21,30 @@ export default class Detail extends Component {
                 }
             }
         } = launch;
+        const mapViewRegion = {
+            latitude,
+            longitude,
+            latitudeDelta: 5,
+            longitudeDelta: 5
+        };
+        const marker = {
+            coordinate: {
+                latitude,
+                longitude
+            },
+            title: "Launch Site",
+            description: ""
+        };
 
         return (
             <View style={styles.container}>
                 <View style={styles.mapContainer}>
                     <MapView
                         style={styles.map}
-                        region={{
-                            latitude,
-                            longitude,
-                            latitudeDelta: 10,
-                            longitudeDelta: 10
-                        }}
-                    />
+                        region={mapViewRegion}
+                    >
+                        <MapView.Marker {...marker} />
+                    </MapView>
                 </View>
                 <View style={styles.flightDetails}>
                     <Text>{text}</Text>
