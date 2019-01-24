@@ -10,7 +10,8 @@ import Detail from './components/detail';
 const { LANDSCAPE } = ScreenOrientation.Orientation;
 const appState = observable({
   launches: [],
-  launchDetail: null
+  launchDetail: null,
+  rocketImages: {}
 });
 
 async function getLaunchDetail(launch) {
@@ -29,17 +30,22 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    fetch('https://api.spacexdata.com/v3/launches?start=2019-01-01&end=2019-04-30')
+    fetch('https://api.spacexdata.com/v3/launches/upcoming')
       .then(r => r.json())
       .then(ls => appState.launches.push(...ls))
       .then(() => console.log(appState.launches.length));
+
+    fetch('https://api.spacexdata.com/v3/rockets')
+      .then(r => r.json())
+      .then(rs => rs.map(r => ({ rocket: r.rocket_name, imageUrl: r.flickr_images[0] })))
+      .then(rs => appState.rocketImages = rs.reduce((o, r) => ({ ...o, [r.rocket]: r.imageUrl })));
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.list}>
-          <List launches={appState.launches} onLaunchPress={async l => appState.launchDetail = await getLaunchDetail(l)} />
+          <List launches={appState.launches} images={appState.rocketImages} onLaunchPress={async l => appState.launchDetail = await getLaunchDetail(l)} />
         </View>
         <View style={styles.detail}>
           <Detail launch={appState.launchDetail} />
