@@ -56,12 +56,11 @@ export default class Detail extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingVertical: 20,
+        paddingVertical: 8,
         paddingRight: 4
     },
     mapContainer: {
-        flex: 1,
-        padding: 4
+        flex: 1
     },
     map: {
         ...StyleSheet.absoluteFillObject,
