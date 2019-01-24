@@ -11,16 +11,31 @@ export default class List extends Component {
     super(props);
   }
 
+  _getThumbnail(name) {
+    const uri = this.props.images[name];
+
+    if (uri) {
+      return { uri };
+    } else {
+      return require('../../assets/rocketinsights_logo_mark.png');
+    }
+  }
+
   render() {
     const { launches } = this.props;
-    
+
     if (launches.length === 0) {
       return <View style={styles.loading}><Text>Loading...</Text></View>;
     }
 
     return (
       <ScrollView>
-        {launches.map(l => <ListItem onPress={() => this.props.onLaunchPress(l)} key={l.flight_number} launch={l} />)}
+        {launches.map(l => (
+          <ListItem
+            onPress={() => this.props.onLaunchPress(l)}
+            key={l.flight_number}
+            launch={l}
+            thumbnail={this._getThumbnail(l.rocket.rocket_name)} />))}
       </ScrollView>
     );
   }
