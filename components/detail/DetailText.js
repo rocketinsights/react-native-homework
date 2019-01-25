@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AppRegistry, StyleSheet } from 'react-native';
+import { ScrollView, Text, AppRegistry, StyleSheet } from 'react-native';
 import moment from 'moment';
 
 const formats = {
@@ -18,7 +18,7 @@ export default class DetailText extends Component {
         const launchTimestamp = launchDate.format(dateFormat);
         const launchDetails = launch.details || 'No details available yet. Check back later!';
         return (
-            <View>
+            <ScrollView>
                 <Text style={styles.label}>Launch Date</Text>
                 <Text style={styles.text}>{launchTimestamp}</Text>
 
@@ -30,7 +30,7 @@ export default class DetailText extends Component {
 
                 <Text style={styles.label}>About the Launch Site</Text>
                 <Text style={styles.text}>{launch.launch_site.details}</Text>
-            </View>
+            </ScrollView>
         );
     }
 }
