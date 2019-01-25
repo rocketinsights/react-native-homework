@@ -10,9 +10,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/rocketinsights_logo_mark.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/rocketinsights_logo_mark.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
