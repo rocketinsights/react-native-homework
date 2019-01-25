@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TextInput, Text } from 'react-native';
 import { ScreenOrientation } from 'expo';
 import { observable } from 'mobx';
-import { observer, componentByNodeRegistry } from 'mobx-react';
+import { observer } from 'mobx-react';
 import fetch from 'cross-fetch';
 import List from './components/list';
 import Detail from './components/detail';
