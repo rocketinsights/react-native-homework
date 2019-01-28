@@ -8,15 +8,30 @@ const formats = {
     hour: 'MMM Do YYYY, h A',
     day: 'MMM Do YYYY',
     month: 'MMMM YYYY',
-    quarter: '[Q]Q YYYY'
+    quarter: '[Q]Q YYYY',
+    year: 'YYYY'
 };
 
 export default class DetailText extends Component {
+
+    getLaunchTimestamp() {
+        const { launch } = this.props;
+        const precision = launch.tentative_max_precision;
+        const launchDate = moment.utc(launch.launch_date_utc);
+        const dateFormat = launch.is_tentative ? formats[precision] : formats.default;
+
+        if (precision === 'half') {
+            const which = launchDate.month() < 6 ? 'First' : 'Second';
+
+            return `${which} half of ${launchDate.year()}`;
+        }
+
+        return launchDate.format(dateFormat);
+    }
+
     render() {
         const { launch } = this.props;
-        const launchDate = moment.utc(launch.launch_date_utc);
-        const dateFormat = launch.is_tentative ? formats[launch.tentative_max_precision] : formats.default;
-        const launchTimestamp = launchDate.format(dateFormat);
+        const launchTimestamp = this.getLaunchTimestamp();
         const launchDetails = launch.details || 'No details available yet. Check back later!';
         return (
             <ScrollView>
