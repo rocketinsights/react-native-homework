@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, AppRegistry, StyleSheet } from 'react-native';
 import moment from 'moment';
+import DetailTextItem from './DetailTextItem';
 
 const formats = {
     default: 'MMM Do YYYY, h:mm A',
@@ -19,17 +20,10 @@ export default class DetailText extends Component {
         const launchDetails = launch.details || 'No details available yet. Check back later!';
         return (
             <ScrollView>
-                <Text style={styles.label}>Launch Date</Text>
-                <Text style={styles.text}>{launchTimestamp}</Text>
-
-                <Text style={styles.label}>Rocket Class</Text>
-                <Text style={styles.text}>{launch.rocket.rocket_name}</Text>
-
-                <Text style={styles.label}>Launch Info</Text>
-                <Text style={styles.text}>{launchDetails}</Text>
-
-                <Text style={styles.label}>About the Launch Site</Text>
-                <Text style={styles.text}>{launch.launch_site.details}</Text>
+            <DetailTextItem title='Launch Date' text={launchTimestamp} />
+            <DetailTextItem title='Rocket Class' text={launch.rocket.rocket_name} />
+            <DetailTextItem title='Launch Info' text={launchDetails} />
+            <DetailTextItem title='About the Launch Site' text={launch.launch_site.details} />
             </ScrollView>
         );
     }
