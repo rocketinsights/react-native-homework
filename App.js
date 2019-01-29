@@ -2,16 +2,12 @@ import React from 'react';
 import { ScreenOrientation } from 'expo';
 import { Provider } from 'mobx-react';
 import Home from './components/home';
-import { AppStore } from './stores';
+import Stores from './stores';
 
-const { LANDSCAPE } = ScreenOrientation.Orientation;
-const appStore = new AppStore();
-
-appStore.loadAppState();
-ScreenOrientation.allowAsync(LANDSCAPE);
+ScreenOrientation.allowAsync(ScreenOrientation.Orientation.LANDSCAPE);
 
 export default App = () => (
-  <Provider appStore={appStore}>
+  <Provider {...Stores}>
     <Home />
   </Provider>
 );

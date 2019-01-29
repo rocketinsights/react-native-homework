@@ -4,24 +4,21 @@ import { MapView } from 'expo';
 import { observer, inject } from 'mobx-react';
 import DetailText from './DetailText';
 
-@inject('appStore')
+@inject('appStore', 'launchpadsStore')
 @observer
 export default class LaunchDetail extends Component {
     render() {
-        const { appStore: { selectedLaunch } } = this.props;
-
+        const { appStore: { selectedLaunch }, launchpadsStore } = this.props;
+        
         if (!selectedLaunch) {
             return <View style={styles.noSelection}><Text>Select a Launch to view details</Text></View>;
         }
-
+        
+        const launchpad = launchpadsStore.getLaunchpad(selectedLaunch.launch_site.site_id);
         const {
-            launch_site: {
-                location: {
-                    latitude,
-                    longitude
-                }
-            }
-        } = selectedLaunch;
+            latitude,
+            longitude
+        } = launchpad.location;
         const mapViewRegion = {
             latitude,
             longitude,

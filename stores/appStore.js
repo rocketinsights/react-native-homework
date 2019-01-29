@@ -3,7 +3,6 @@ import moment from 'moment';
 
 const LAUNCHES_URL = 'https://api.spacexdata.com/v3/launches/upcoming';
 const ROCKETS_URL = 'https://api.spacexdata.com/v3/rockets';
-const LAUNCHPADS_URL = 'https://api.spacexdata.com/v3/launchpads/';
 
 function getPessimisticLaunchDate(launch) {
     if (!launch.is_tentative) {
@@ -67,9 +66,6 @@ export default class AppStore {
     }
 
     @action async selectLaunch(launch) {
-        const { launch_site: { site_id: launchpadId } } = launch;
-        const launchpad = await fetch(`${LAUNCHPADS_URL}${launchpadId}`).then(r => r.json());
-
-        this.selectedLaunch = { ...launch, ...{ launch_site: launchpad } };
+        this.selectedLaunch = launch;
     }
 }
