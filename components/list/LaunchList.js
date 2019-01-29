@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react';
 
 @inject('appStore')
 @observer
-export default class List extends Component {
+export default class LaunchList extends Component {
 
   render() {
     const { appStore: { launches, selectedLaunch } } = this.props;
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('LaunchSchedule', () => List);
+AppRegistry.registerComponent('LaunchSchedule', () => LaunchList);

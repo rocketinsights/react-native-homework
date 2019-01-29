@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import List from '../list';
+import LaunchList from '../list';
 import Detail from '../detail';
 
 @inject('appStore')
@@ -19,7 +19,7 @@ export default class Home extends Component {
                             onChangeText={t => appStore.setSearchText(t)} />
                         <Text style={styles.sort} onPress={() => appStore.flipSort()}>Launch Date {(appStore.sort === 'asc' ? '⬇' : '⬆')}</Text>
                     </View>
-                    <List />
+                    <LaunchList />
                 </View>
                 <View style={styles.detail}>
                     <Detail />

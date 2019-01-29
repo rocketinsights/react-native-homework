@@ -1,3 +1,3 @@
-import List from './List';
+import LaunchList from './LaunchList';
 
-export default List;
+export default LaunchList;
