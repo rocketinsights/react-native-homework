@@ -4,13 +4,6 @@ import ListItem from './ListItem';
 import { observer, inject } from 'mobx-react';
 import moment from 'moment';
 
-function getPessimisticLaunchDate(launch) {
-  if (!launch.is_tentative) {
-    return moment.utc(launch.launch_date_utc);
-  }
-
-  return moment.utc(launch.launch_date_utc).endOf(launch.tentative_max_precision);
-}
 
 const comparitors = {
   desc(a, b) {
@@ -36,17 +29,6 @@ const comparitors = {
 @inject('appStore')
 @observer
 export default class List extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  _passesFilter(launch) {
-    const filters = this.props.appStore.searchText.split(' ').map(w => new RegExp(w, 'i'));
-    const test = s => filters.some(f => f.test(s));
-    return test(launch.mission_name)
-        || test(launch.launch_site.site_name_long);
-  }
-
   _getThumbnail(name) {
     const uri = this.props.appStore.rocketImages[name];
 
@@ -58,11 +40,11 @@ export default class List extends Component {
   }
 
   render() {
-    const { appStore: { sort, launches, selectedLaunch } } = this.props;
+    const { appStore, appStore: { launches, selectedLaunch } } = this.props;
 
     const renderItem = l => (
       <ListItem
-        onPress={() => this.props.onLaunchPress(l)}
+        onPress={() => appStore.selectLaunch(l)}
         key={l.flight_number}
         launch={l}
         selected={selectedLaunch && selectedLaunch.flight_number === l.flight_number}
@@ -74,9 +56,7 @@ export default class List extends Component {
     }
 
     return (
-      <ScrollView>
-        {launches.filter(l => this._passesFilter(l)).sort(comparitors[sort]).map(renderItem)}
-      </ScrollView>
+      <ScrollView>{launches.map(renderItem)}</ScrollView>
     );
   }
 }
