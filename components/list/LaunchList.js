@@ -7,7 +7,7 @@ import { observer, inject } from 'mobx-react';
 @observer
 export default class LaunchList extends Component {
   render() {
-    const { appStore: { launches, selectedLaunch } } = this.props;
+    const { appStore: { launches } } = this.props;
 
     if (launches.length === 0) {
       return <View style={styles.loading}><Text>Loading...</Text></View>;
