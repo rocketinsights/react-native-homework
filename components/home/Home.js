@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, StyleSheet } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import LaunchList from '../list';
 import LaunchDetail from '../detail';
@@ -10,7 +10,7 @@ export default class Home extends Component {
     render() {
         const { appStore } = this.props;
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <View style={styles.list}>
                     <View style={styles.searchSortContainer}>
                         <TextInput
@@ -24,7 +24,7 @@ export default class Home extends Component {
                 <View style={styles.detail}>
                     <LaunchDetail />
                 </View>
-            </View>
+            </SafeAreaView>
         )
     }
 }
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         backgroundColor: '#fff',
-        padding: 16
+        paddingHorizontal: 16
     },
     list: {
         flex: 3
