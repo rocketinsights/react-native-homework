@@ -1,3 +1,3 @@
-import Detail from './Detail';
+import LaunchDetail from './LaunchDetail';
 
-export default Detail;
+export default LaunchDetail;

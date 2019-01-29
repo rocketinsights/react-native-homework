@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import LaunchList from '../list';
-import Detail from '../detail';
+import LaunchDetail from '../detail';
 
 @inject('appStore')
 @observer
@@ -22,7 +22,7 @@ export default class Home extends Component {
                     <LaunchList />
                 </View>
                 <View style={styles.detail}>
-                    <Detail />
+                    <LaunchDetail />
                 </View>
             </View>
         )

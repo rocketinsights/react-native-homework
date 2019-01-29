@@ -6,7 +6,7 @@ import DetailText from './DetailText';
 
 @inject('appStore')
 @observer
-export default class Detail extends Component {
+export default class LaunchDetail extends Component {
     render() {
         const { appStore: { selectedLaunch } } = this.props;
 
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
     }
 });
 
-AppRegistry.registerComponent('LaunchSchedule', () => Detail);
+AppRegistry.registerComponent('LaunchSchedule', () => LaunchDetail);
