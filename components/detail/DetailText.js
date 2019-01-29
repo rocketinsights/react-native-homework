@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, AppRegistry, StyleSheet } from 'react-native';
+import { ScrollView, AppRegistry } from 'react-native';
 import moment from 'moment';
 import DetailTextItem from './DetailTextItem';
 
@@ -13,7 +13,6 @@ const formats = {
 };
 
 export default class DetailText extends Component {
-
     getLaunchTimestamp() {
         const { launch } = this.props;
         const precision = launch.tentative_max_precision;
@@ -35,22 +34,13 @@ export default class DetailText extends Component {
         const launchDetails = launch.details || 'No details available yet. Check back later!';
         return (
             <ScrollView>
-            <DetailTextItem title='Launch Date' text={launchTimestamp} />
-            <DetailTextItem title='Rocket Class' text={launch.rocket.rocket_name} />
-            <DetailTextItem title='Launch Info' text={launchDetails} />
-            <DetailTextItem title='About the Launch Site' text={launch.launch_site.details} />
+                <DetailTextItem title='Launch Date' text={launchTimestamp} />
+                <DetailTextItem title='Rocket Class' text={launch.rocket.rocket_name} />
+                <DetailTextItem title='Launch Info' text={launchDetails} />
+                <DetailTextItem title='About the Launch Site' text={launch.launch_site.details} />
             </ScrollView>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    label: {
-        fontWeight: 'bold'
-    },
-    text: {
-        marginBottom: 8
-    }
-});
 
 AppRegistry.registerComponent('LaunchSchedule', () => DetailText);

@@ -6,7 +6,6 @@ import { observer, inject } from 'mobx-react';
 @inject('appStore')
 @observer
 export default class LaunchList extends Component {
-
   render() {
     const { appStore: { launches, selectedLaunch } } = this.props;
 
