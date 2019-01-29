@@ -19,17 +19,10 @@ export default class Home extends Component {
                             onChangeText={t => appStore.setSearchText(t)} />
                         <Text style={styles.sort} onPress={() => appStore.flipSort()}>Launch Date {(appStore.sort === 'asc' ? '⬇' : '⬆')}</Text>
                     </View>
-                    <List
-                        launches={appStore.launches}
-                        images={appStore.rocketImages}
-                        filter={appStore.searchText}
-                        sort={appStore.sort}
-                        selectedLaunch={appStore.selectedLaunch}
-                        onLaunchPress={l => appStore.selectLaunch(l)}
-                    />
+                    <List onLaunchPress={l => appStore.selectLaunch(l)} />
                 </View>
                 <View style={styles.detail}>
-                    <Detail launch={appStore.selectedLaunch} />
+                    <Detail />
                 </View>
             </View>
         )

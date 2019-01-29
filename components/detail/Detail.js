@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Text } from 'react-native';
 import { MapView } from 'expo';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import DetailText from './DetailText';
 
+@inject('appStore')
 @observer
 export default class Detail extends Component {
     render() {
-        const { launch } = this.props;
+        const { appStore: { selectedLaunch } } = this.props;
 
-        if (!launch) {
+        if (!selectedLaunch) {
             return <View style={styles.noSelection}><Text>Select a Launch to view details</Text></View>;
         }
 
@@ -20,7 +21,7 @@ export default class Detail extends Component {
                     longitude
                 }
             }
-        } = launch;
+        } = selectedLaunch;
         const mapViewRegion = {
             latitude,
             longitude,
@@ -38,15 +39,12 @@ export default class Detail extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.mapContainer}>
-                    <MapView
-                        style={styles.map}
-                        region={mapViewRegion}
-                    >
+                    <MapView style={styles.map} region={mapViewRegion}>
                         <MapView.Marker {...marker} />
                     </MapView>
                 </View>
                 <View style={styles.flightDetails}>
-                    <DetailText launch={launch} />
+                    <DetailText launch={selectedLaunch} />
                 </View>
             </View>
         );

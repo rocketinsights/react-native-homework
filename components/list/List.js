@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, ScrollView, View, Text } from 'react-native';
 import ListItem from './ListItem';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import moment from 'moment';
 
 function getPessimisticLaunchDate(launch) {
@@ -33,6 +33,7 @@ const comparitors = {
   }
 };
 
+@inject('appStore')
 @observer
 export default class List extends Component {
   constructor(props) {
@@ -40,14 +41,14 @@ export default class List extends Component {
   }
 
   _passesFilter(launch) {
-    const filters = this.props.filter.split(' ').map(w => new RegExp(w, 'i'));
+    const filters = this.props.appStore.searchText.split(' ').map(w => new RegExp(w, 'i'));
     const test = s => filters.some(f => f.test(s));
     return test(launch.mission_name)
         || test(launch.launch_site.site_name_long);
   }
 
   _getThumbnail(name) {
-    const uri = this.props.images[name];
+    const uri = this.props.appStore.rocketImages[name];
 
     if (uri) {
       return { uri };
@@ -57,7 +58,8 @@ export default class List extends Component {
   }
 
   render() {
-    const { launches, selectedLaunch, sort } = this.props;
+    const { appStore: { sort, launches, selectedLaunch } } = this.props;
+
     const renderItem = l => (
       <ListItem
         onPress={() => this.props.onLaunchPress(l)}
