@@ -13,7 +13,7 @@ export default class LaunchDetail extends Component {
         if (!selectedLaunch) {
             return <View style={styles.noSelection}><Text>Select a Launch to view details</Text></View>;
         }
-        
+
         const launchpad = launchpadsStore.getLaunchpad(selectedLaunch.launch_site.site_id);
         const {
             latitude,
@@ -41,7 +41,7 @@ export default class LaunchDetail extends Component {
                     </MapView>
                 </View>
                 <View style={styles.flightDetails}>
-                    <DetailText launch={selectedLaunch} />
+                    <DetailText launch={selectedLaunch} launchpad={launchpad} />
                 </View>
             </View>
         );

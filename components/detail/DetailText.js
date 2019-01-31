@@ -29,7 +29,7 @@ export default class DetailText extends Component {
     }
 
     render() {
-        const { launch } = this.props;
+        const { launch, launchpad } = this.props;
         const launchTimestamp = this.getLaunchTimestamp();
         const launchDetails = launch.details || 'No details available yet. Check back later!';
         return (
@@ -37,7 +37,7 @@ export default class DetailText extends Component {
                 <DetailTextItem title='Launch Date' text={launchTimestamp} />
                 <DetailTextItem title='Rocket Class' text={launch.rocket.rocket_name} />
                 <DetailTextItem title='Launch Info' text={launchDetails} />
-                <DetailTextItem title='About the Launch Site' text={launch.launch_site.details} />
+                <DetailTextItem title='About the Launch Site' text={launchpad.details} />
             </ScrollView>
         );
     }
