@@ -8,17 +8,9 @@ import LaunchDetail from '../detail';
 @observer
 export default class Home extends Component {
     render() {
-        const { appStore } = this.props;
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.list}>
-                    <View style={styles.searchSortContainer}>
-                        <TextInput
-                            style={styles.search}
-                            placeholder="Filter..."
-                            onChangeText={t => appStore.setSearchText(t)} />
-                        <Text style={styles.sort} onPress={() => appStore.flipSort()}>Launch Date {(appStore.sort === 'asc' ? '⬇' : '⬆')}</Text>
-                    </View>
                     <LaunchList />
                 </View>
                 <View style={styles.detail}>

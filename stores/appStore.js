@@ -39,13 +39,9 @@ export default class AppStore {
     @observable _launches = [];
     @observable selectedLaunch = null;
     @observable rocketImages = {};
-    @observable searchText = '';
-    @observable sort = 'desc';
 
     @computed get launches() {
-        return this._launches
-            .filter(launchFilter(this.searchText))
-            .sort(launchComparitor(this.sort));
+        return this._launches;
     }
 
     @action async loadAppState() {
@@ -55,14 +51,6 @@ export default class AppStore {
         this.rocketImages = await fetch(ROCKETS_URL)
             .then(r => r.json())
             .then(rs => rs.reduce((o, r) => ({ ...o, [r.rocket_name]: r.flickr_images[0] })));
-    }
-
-    @action flipSort() {
-        this.sort = this.sort === 'desc' ? 'asc' : 'desc';
-    }
-
-    @action setSearchText(text) {
-        this.searchText = text;
     }
 
     @action async selectLaunch(launch) {
